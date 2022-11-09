@@ -1,0 +1,73 @@
+### Create Record
+POST http://localhost:4004/employee/Employee
+Content-Type: application/json
+
+{
+    "userId": "nishnanth",
+    "hireDate": "2021-06-01T00:00:00Z",
+    "terminationDate": null,
+    "originalStartDate": "2021-06-01T00:00:00Z",
+    "status": "HIRENEW"
+}
+
+### get record
+GET http://localhost:4004/employee/Employee
+Content-Type: application/json
+
+### Upsert operation
+
+POST http://localhost:4004/employee/upsert
+Content-Type: application/json
+
+{"__metadata":{"uri":"https://apisalesdemo4.successfactors.com:443/odata/v2/EmpEmployment(personIdExternal='102074',userId='102074')","type":"SFOData.EmpEmployment"},"customString1":"4","customString2":"8","customString3":"21","customString4":"242"}
+
+
+### update empemployment
+
+PUT http://localhost:4004/employee/EmpEmployment(personIdExternal='dnewman',userId='dnewman')
+Content-Type: application/json
+
+{
+"lastDateWorked":"2016-10-11T00:00:00.000Z",
+"seniorityDate":"2021-10-24T00:00:00.000Z"
+}
+
+#### get empemployment
+GET http://localhost:4004/employee/EmpEmployment(personIdExternal='102074',userId='102074')
+
+
+### update user
+POST http://localhost:4004/employee/User
+Content-Type: application/json
+
+{
+    "userId": "dnewman",
+    "defaultFullName":"David Newman"
+}
+
+### update photo 
+POST http://localhost:4004/employee/Photo
+Content-Type: application/json
+
+{
+	"photoType": 27,
+	"userId": "102074",
+	"photo": "_9j_4AAQSkZJRgABAgAAAQABAAD_2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH_2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH_wAARCAAeAB4DASIAAhEBAxEB_8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL_8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4-Tl5ufo6erx8vP09fb3-Pn6_8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL_8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3-Pn6_9oADAMBAAIRAxEAPwDybxD8U9P8LaHqXiHxFq8Ol6NpFtLfanqN_M0cFtbxJl5CYwzyM2dkUUUck9xI6QQQzTuiN-ZnxB_bN-P_AIisL_xP8O7e38H-CRO1tZ_bfDllrXi6G1N3pkEGr3q3uvSaZEbiSYxpHaaXqNmn2h9OimvbxbfVYv0I8H-CvBnxU8f_AAz-HnxHt7-78B-L_ih8NtA8XRWKs8yeHtV8b6FZareuwSaKzt9JtbiXV59WuoLmx0NLA65fWt1Z6fPby_0n_tf_ALPn7DsWgz-AdH8GfA-PVbSeW81LSbCbQF1zRtSktp7xLzU10ydNc0S1lXT3imWdkhu2edZI2lMjS_nGcZwsplFRwyrqKhOq5VOWXJObgowg4NSd4yTb5bWTP1_hXhylxBU9lUxFWjOtKtSoONFzoxnQp06s5V588HBe_BR5VO99UuVn8kX7OH7cukfGm9vPBHiCODwz8RrCGSWCyMk0eieMrSz3LeX3hOW8cXcd1bpDJfXnhnUDLq1ppbm-srnXLbTPENxov123iu5JJ85sZxjDjHAx03MeO5HfGc9fk3Vf2cPDWreJovif-zrN4em0r4TfGfwY2s3Xgy9hvrSD4fePD4l8OeI7SK-v5DZajYWmm6fPpl2bbV9U1HRor-8tLSG1vZbi3uPZpZXR2VWJ2sVBwG6YBGAcHkfe59M9h6-BxNLMMNTxUKM6PtIq9Kokpxat0aWjW2y302Z4ed5XVyTMK2BqVqeIVOVo1qWsJrli2k7tO3MtU-qd-hveEdR07RvEmmX-u211e6A0lzpXiO109NJGrXHhrXLG60PxJDoVzrel63pWm-IX0HUtRXw7rd1pOpf2DrZ0_W4LWa5sIK_pD_aduf2XtU8C_Hv4xNofg3T5fjX-yJ4i0nSfixqXibwJ4H1rxToHj3wvrz6V_YureKb7wkbnTbODVLe7bxBq-vyJ4bm1jw9baL9j02_1d7D-ZgtubBzncAMYA-bODgggdeQBz0z3r-ibxlo9j4M_4Jt_DbUdN0dvG_hrxx-yL8JviVqWj-NfF_iDTdRitviJ4Mj8XzxWOseH7eW601tC1m5uLbQ9DtZDYWGm2WkC21SG4ivnvPneKsND2eGxsIx51Xp4abcYtzi1OVFNyvpCpeS3-LVrp9p4aZjBZlUyzFzr_U5UquISozlGVJueFjiZRSaUpVaUKcZc104xs03ZH88f7MPjv4b-JfhB8c7C38L6fZ3s3wa8L-GPC1-9xZaPD4i034efHb4D_ZdXg0Pw9r-q6Lo3iSx06w-Hd0fC_hrXNX0_SYPD2r-HL-_1zT_CF6sdFyMfeIGSB1yMdQWLAn3-nqK8e-EHj631r4c_tA6zYeGbTRfBHwz-H_xe8VeENGtNW1KbXtb-Lnw8-E974t8LnxJqWqf2pb6V8MNKsZ9J0HVNA0CJ9e8WGKTU49Y8IjT7HTZrfwU-Lei_HDwBB4_0PS9U0e1_tW60C-03V2tXuLbWdNtrWTU47S4spZY77S47i4aGw1CaPT7u9hjFxcaTp0khtk-lyrDuhgYTlBJTcmrvnklLlly6yekb23e2jtY-V4vx31zO69NSThSilFKChF2jCn7RxUYxUqkacJStFay1V72__9k="
+}
+
+
+
+### get photo operation
+
+GET http://localhost:4004/employee/Photo(userId='viscon',photoType=27)?$select=userId,photoType,photo
+Content-Type: application/json
+
+##### insert into User
+
+POST http://localhost:4004/employee/User
+Content-Type: application/json
+
+{
+    "userId": "viscon",
+    "defaultFullName": "Nishnanth Payani"
+}

@@ -1,0 +1,72 @@
+{
+  "name": "mock-successfactor",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^5.9.8",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.8.1",
+    "@sap/hana-client": "^2.10.15",
+    "@sap/xb-msg-amqp-v100": "^0.9.58",
+    "@sap/xssec": "^3.2.10",
+    "cors": "^2.8.5",
+    "express": "^4",
+    "hdb": "^0.18.3",
+    "passport": "^0.4.1",
+    "url-parse": "^1.5.10"
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "^4.2.2",
+    "sqlite3": "^5.0.2"
+  },
+  "scripts": {
+    "start": "cds run"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana"
+      },
+      "messaging": {
+        "kind": "enterprise-messaging-shared",
+        "[production]": {
+          "kind": "enterprise-messaging-shared"
+        }
+      },
+      "PhotoUser": {
+        "kind": "odata-v2",
+        "model": "srv/external/PhotoUser"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  }
+}
