@@ -1,6 +1,6 @@
 module.exports = async (srv) => {
     const messaging = await cds.connect.to("messaging");
-    const { Employee, EmpEmployment,Photo } = srv.entities;
+    const { Employee, EmpEmployment,Photo,User } = srv.entities;
     var Url = require('url-parse');
     var querystring = require('querystring');
     srv.on("CREATE", "Employee", async (req, res) => {
@@ -20,32 +20,56 @@ module.exports = async (srv) => {
 
     srv.on("READ", "EmpEmployment", async(req)=>{
         let {from,where,limit,orderBy,columns} = req.query.SELECT;
-        console.log(columns)
+        console.log(where)
         columns == undefined ? columns = [ '*', { ref: [ 'userNav' ], expand: [ '*' ] } ] : columns.push({ ref: [ 'userNav' ], expand: [ '*' ] });
-       
-        return cds.run({
-            SELECT: {
-                from: from,
-                where: where,
-                limit: limit,
-                columns: columns,
-                orderBy: orderBy
-            }
-        });        
+        let result = await cds.run({ SELECT: { from: from, where: where, limit: limit, columns: columns, orderBy: orderBy } });
+        if(result.length == 0){
+            let empdataresult = await cds.run(SELECT.one(User).where({ userId: from.ref[0].where[2].val }));
+            console.log(empdataresult);
+            return {
+                userId: from.ref[0].where[2].val,
+                lastDateWorked: null,
+                seniorityDate: null,
+                userNav: {
+                    defaultFullName: empdataresult !== null ? empdataresult: {}
+                }
+                };
+        }
+        else{
+        return result;}  
+    })
+
+    srv.on("UPDATE","Employee", async (req, res) => {
+        
+        const payload = {
+            "userId": req.data.userId,
+            "hireDate": req.data.hireDate,
+            "terminationDate": req.data.terminationDate,
+            "originalStartDate": req.data.originalStartDate,
+            "status": req.data.status
+        }
+        let empdataresult = await cds.run(SELECT.one(Employee).where({ userId: req.data.userId }));
+        if (!empdataresult) {
+            result = await cds.run(INSERT.into(Employee).entries(payload));
+        }
+        else {
+            result = await cds.run(UPDATE(Employee).set(payload).where({userId: req.data.userId }));
+        }
+        
+        
+        return payload;
     })
     
 
     srv.on("READ","Photo", async(req)=>{
         let {from,where,limit,orderBy,columns} = req.query.SELECT;
-        return await cds.run({
-            SELECT: {
-                from: from,
-                where: where,
-                limit: limit,
-                columns: columns,
-                orderBy: orderBy
-            }
-        });   
+        let result = await cds.run({ SELECT: { from: from, where: where, limit: limit, columns: columns, orderBy: orderBy } });
+        if(result.length == 0){
+            let res = {}
+            return res;
+        }
+        else{
+        return result;}
     })
 
 
@@ -56,7 +80,8 @@ module.exports = async (srv) => {
         let urlattributes = querystring.parse(url.pathname.split("/")[3].slice(14, -1).replace(",", '&'));
         console.log(urlattributes);
         let userId = urlattributes.userId.replaceAll(/'/g,"");
-        let personIdExternal = urlattributes.personIdExternal.replace(/'/g,"");        
+        let personIdExternal = urlattributes.personIdExternal.replace(/'/g,""); 
+        var d = new Date(req.data.customString1, req.data.customString2, req.data.customString3, 0, 0, 0, 0);       
         let payload = {
             "userId": userId ,
             "personIdExternal": userId,

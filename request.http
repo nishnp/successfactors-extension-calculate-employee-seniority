@@ -1,18 +1,31 @@
 ### Create Record
-POST http://localhost:4004/employee/Employee
+POST http://localhost:4004/odata/v2/Employee
 Content-Type: application/json
 
 {
-    "userId": "nishnanth",
+    "userId": "nishnanthp",
     "hireDate": "2021-06-01T00:00:00Z",
     "terminationDate": null,
     "originalStartDate": "2021-06-01T00:00:00Z",
     "status": "HIRENEW"
 }
+##########
+
+PUT http://localhost:4004/odata/v2/Employee/nishnanthp
+Content-Type: application/json
+
+{
+    "userId": "nishnanthp",
+    "terminationDate": "2018-09-18T00:00:00.000Z",
+    "status": "REHREH"
+}
 
 ### get record
-GET http://localhost:4004/employee/Employee
+GET http://localhost:4004/odata/v2/Employee
 Content-Type: application/json
+
+####
+PATCH http://localhost:4004/odata/v2/Employee(
 
 ### Upsert operation
 
@@ -24,16 +37,16 @@ Content-Type: application/json
 
 ### update empemployment
 
-PUT http://localhost:4004/employee/EmpEmployment(personIdExternal='dnewman',userId='dnewman')
+PATCH https://usecasefactory-ixpucf-dev-mock-successfactors-srv.cfapps.eu10.hana.ondemand.com/odata/v2/EmpEmployment(personIdExternal='test3',userId='test3')
 Content-Type: application/json
 
 {
-"lastDateWorked":"2016-10-11T00:00:00.000Z",
-"seniorityDate":"2021-10-24T00:00:00.000Z"
+"lastDateWorked":"2016-10-17T00:00:00.000Z",
+"seniorityDate":"2021-10-25T00:00:00.000Z"
 }
 
 #### get empemployment
-GET http://localhost:4004/employee/EmpEmployment(personIdExternal='102074',userId='102074')
+GET http://localhost:4004/odata/v2/EmpEmployment(userId='test2',personIdExternal='test2')?$select=userId,lastDateWorked,seniorityDate
 
 
 ### update user
