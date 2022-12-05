@@ -4,7 +4,7 @@ using {
     cuid
 } from '@sap/cds/common';
 
-namespace sap.capire.sfsf.mock;
+namespace sap.capire.sfsf.mock.service;
 
 entity Employee : managed {
     key userId            : String(64);

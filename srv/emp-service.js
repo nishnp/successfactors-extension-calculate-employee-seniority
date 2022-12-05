@@ -1,6 +1,7 @@
 module.exports = async (srv) => {
     const messaging = await cds.connect.to("messaging");
     const { Employee, EmpEmployment,Photo,User } = srv.entities;
+    const  messagingurl = process.env["messagingurl"];
     var Url = require('url-parse');
     var querystring = require('querystring');
     srv.on("CREATE", "Employee", async (req, res) => {
@@ -14,7 +15,7 @@ module.exports = async (srv) => {
             "originalStartDate": req.data.originalStartDate,
             "status": req.data.status
         }
-        messaging.emit("sap/successfactors/SFPART057671/isc/contractchange", payload);
+        messaging.emit(messagingurl, payload);
         return payload;
     });
 
@@ -76,12 +77,10 @@ module.exports = async (srv) => {
     srv.on("upsert", async (req) => {
         console.log("inside upsert");
         url = Url(req.data.__metadata.uri, true);
-        console.log(url.pathname.split("/")[3].slice(14, -1))
         let urlattributes = querystring.parse(url.pathname.split("/")[3].slice(14, -1).replace(",", '&'));
         console.log(urlattributes);
         let userId = urlattributes.userId.replaceAll(/'/g,"");
-        let personIdExternal = urlattributes.personIdExternal.replace(/'/g,""); 
-        var d = new Date(req.data.customString1, req.data.customString2, req.data.customString3, 0, 0, 0, 0);       
+        let personIdExternal = urlattributes.personIdExternal.replace(/'/g,"");  
         let payload = {
             "userId": userId ,
             "personIdExternal": userId,

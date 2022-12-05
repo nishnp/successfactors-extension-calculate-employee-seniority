@@ -29,7 +29,7 @@ PATCH http://localhost:4004/odata/v2/Employee(
 
 ### Upsert operation
 
-POST http://localhost:4004/employee/upsert
+POST http://localhost:4004/odata/v2/upsert
 Content-Type: application/json
 
 {"__metadata":{"uri":"https://apisalesdemo4.successfactors.com:443/odata/v2/EmpEmployment(personIdExternal='102074',userId='102074')","type":"SFOData.EmpEmployment"},"customString1":"4","customString2":"8","customString3":"21","customString4":"242"}

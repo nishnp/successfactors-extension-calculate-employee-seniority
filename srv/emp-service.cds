@@ -1,4 +1,4 @@
-using { sap.capire.sfsf.mock as my } from '../db/schema';
+using { sap.capire.sfsf.mock.service as my } from '../db/schema';
 
 
 service EmployeeService @(path:'/odata/v2')
